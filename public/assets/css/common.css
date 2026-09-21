@@ -1,0 +1,401 @@
+/* ==========================================================================
+   CHUMPAY COMMON & GLOBAL STYLESHEET
+   Brand Theme: Amber Gold (#F59E0B) & Sleek Slate (#0F172A)
+   Typography: Poppins
+   ========================================================================== */
+
+/* 1. Google Font Import - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+:root {
+    /* Brand Theme Colors */
+    --primary-color: #f59e0b;      /* Primary Theme Accent */
+    --primary-hover: #d97706;      /* Amber-600 */
+    --secondary-color: #0f172a;    /* Deep Charcoal Slate-900 */
+    --secondary-hover: #1e293b;    /* Slate-800 */
+
+    --color-primary: #0f172a;
+    --color-primary-hover: #1e293b;
+
+    --color-accent: #f59e0b;       /* Brand Amber Gold */
+    --color-accent-hover: #d97706; /* Amber-600 */
+    --color-accent-light: #fef3c7; /* Soft Amber Tint */
+    --color-accent-glow: rgba(245, 158, 11, 0.25);
+
+    /* Text Colors */
+    --text-color: #334155;         /* Slate-700 */
+    --heading-color: #0f172a;      /* Slate-900 */
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94a3b8;
+    --color-text-white: #ffffff;
+
+    /* Backgrounds */
+    --background-color: #ffffff;
+    --light-background: #f8fafc;
+    --color-bg-body: #ffffff;
+    --color-bg-surface: #f8fafc;
+    --color-bg-card: #ffffff;
+
+    /* Borders */
+    --border-color: #e2e8f0;
+    --color-border-card: #e2e8f0;
+    --color-border-light: #f1f5f9;
+    --color-border-dark: #0f172a;
+    --color-border-accent: #f59e0b;
+
+    /* Status Colors */
+    --color-rating-star: #f59e0b;
+    --color-success: #16a34a;
+    --color-info: #2563eb;
+    --color-error: #ef4444;
+
+    /* Typography Tokens */
+    --font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-family-heading: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    --font-size-2xs: 0.625rem;  /* 10px */
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-md: 1.125rem;   /* 18px */
+    --font-size-lg: 1.25rem;    /* 20px */
+    --font-size-xl: 1.5rem;     /* 24px */
+    --font-size-2xl: 1.75rem;   /* 28px */
+    --font-size-3xl: 2.25rem;   /* 36px */
+
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+
+    --line-height-tight: 1.2;
+    --line-height-snug: 1.35;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.65;
+
+    /* Radius Tokens */
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 26px;
+    --radius-full: 9999px;
+
+    /* Elevation & Shadows */
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+    --shadow-card: 0 4px 16px rgba(15, 23, 42, 0.04);
+    --shadow-hover: 0 16px 36px rgba(15, 23, 42, 0.08);
+    --shadow-amber: 0 8px 24px rgba(245, 158, 11, 0.22);
+
+    /* Transitions */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL RESET & FONT INHERITANCE
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+.font-sans,
+.font-heading,
+button,
+input,
+select,
+textarea,
+a,
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family) !important;
+}
+
+html,
+body {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-heading) !important;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.015em;
+    color: var(--heading-color);
+}
+
+/* --------------------------------------------------------------------------
+   SCROLLBAR UTILITIES
+   -------------------------------------------------------------------------- */
+.no-scrollbar,
+.hide-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar,
+.hide-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   POPULAR CATEGORIES CAROUSEL TRACK (Centralized from Blade)
+   -------------------------------------------------------------------------- */
+.pc-track-wrap {
+    will-change: transform;
+    cursor: grab;
+}
+
+.pc-track-wrap.grabbing {
+    cursor: grabbing;
+}
+
+/* Default Desktop (1024px+): Exactly 7 items */
+.pc-item {
+    flex: 0 0 calc((100% - (6 * 16px)) / 7);
+    width: calc((100% - (6 * 16px)) / 7);
+    min-width: calc((100% - (6 * 16px)) / 7);
+}
+
+/* Tablet (641px - 1023px): 5 items */
+@media (max-width: 1023px) {
+    .pc-item {
+        flex: 0 0 calc((100% - (4 * 16px)) / 5);
+        width: calc((100% - (4 * 16px)) / 5);
+        min-width: calc((100% - (4 * 16px)) / 5);
+    }
+}
+
+/* Mobile (<= 640px): 3 items */
+@media (max-width: 640px) {
+    .pc-item {
+        flex: 0 0 calc((100% - (2 * 12px)) / 3);
+        width: calc((100% - (2 * 12px)) / 3);
+        min-width: calc((100% - (2 * 12px)) / 3);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   GEAR UP & CARD ANIMATIONS (Centralized from Blade)
+   -------------------------------------------------------------------------- */
+.gc-overlay {
+    transform: translateY(110%);
+    transition: transform 0.30s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+.group:hover .gc-overlay {
+    transform: translateY(0);
+}
+
+@keyframes guFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[data-card] {
+    opacity: 0;
+}
+
+[data-card].gu-in {
+    animation: guFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --------------------------------------------------------------------------
+   RANGE SLIDER STYLES (Centralized from Shop Filter Blade)
+   -------------------------------------------------------------------------- */
+.range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 20px;
+    background: transparent;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.range-slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    background: transparent;
+    height: 20px;
+    border: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2.5px solid #f59e0b;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25), 0 0 0 2px rgba(245, 158, 11, 0.15);
+    cursor: pointer;
+    pointer-events: auto;
+    margin-top: 1px;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25), 0 0 0 4px rgba(245, 158, 11, 0.25);
+}
+
+.range-slider::-webkit-slider-thumb:active {
+    transform: scale(1.25);
+    cursor: grabbing;
+}
+
+.range-slider::-moz-range-track {
+    background: transparent;
+    height: 20px;
+    border: none;
+}
+
+.range-slider::-moz-range-thumb {
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2.5px solid #f59e0b;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25), 0 0 0 2px rgba(245, 158, 11, 0.15);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.range-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25), 0 0 0 4px rgba(245, 158, 11, 0.25);
+}
+
+.range-slider::-moz-range-thumb:active {
+    transform: scale(1.25);
+    cursor: grabbing;
+}
+
+/* --------------------------------------------------------------------------
+   THEME FOOTER STYLES
+   -------------------------------------------------------------------------- */
+.theme-footer {
+    background-color: #0b0f19;
+    background-image: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(245, 158, 11, 0.08) 0%,
+        transparent 70%
+    );
+    color: var(--color-text-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-footer-glow-line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--color-accent) 50%,
+        transparent 100%
+    );
+    box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+.theme-footer-heading {
+    font-family: var(--font-family-heading) !important;
+    color: var(--color-text-white) !important;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.01em;
+}
+
+.theme-footer-link {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    transition: var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.theme-footer-link:hover {
+    color: var(--color-accent) !important;
+    transform: translateX(4px);
+}
+
+.theme-footer-social-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-white);
+    transition: var(--transition);
+}
+
+.theme-footer-social-btn:hover {
+    background-color: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
+    color: #000000 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px var(--color-accent-glow);
+}
+
+.theme-footer-badge {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.theme-footer-badge:hover {
+    border-color: var(--color-border-accent) !important;
+    box-shadow: 0 0 16px var(--color-accent-glow);
+    transform: translateY(-2px);
+}
