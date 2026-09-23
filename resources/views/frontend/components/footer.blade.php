@@ -78,11 +78,14 @@
                 <ul class="space-y-3.5 text-xs sm:text-sm text-slate-400">
                     <li class="flex items-start gap-2.5">
                         <i class="fa-solid fa-location-dot mt-1 text-amber-500 flex-shrink-0 text-xs"></i>
-                        <span class="leading-relaxed">Textile Complex, Tiruppur Tamil Nadu 641601</span>
+                        <span class="leading-relaxed">Rathinam Techpark
+Rathinam Techzone Campus,
+Pollachi Main Road, Eachanari,
+Coimbatore, Tamil Nadu – 641021, India.</span>
                     </li>
                     <li class="flex items-center gap-2.5">
                         <i class="fa-solid fa-phone text-amber-500 flex-shrink-0 text-xs"></i>
-                        <a href="tel:+917449078888" class="hover:text-amber-500 transition whitespace-nowrap">+91 74490 78888</a>
+                        <a href="tel:+917449078888" class="hover:text-amber-500 transition whitespace-nowrap">+91 123456789</a>
                     </li>
                     <li class="flex items-center gap-2.5">
                         <i class="fa-solid fa-envelope text-amber-500 flex-shrink-0 text-xs"></i>

@@ -19,7 +19,7 @@ class OrderInvoiceController extends Controller
         $company = [
             'name' => 'RYH Textiles',
             'address' => 'Textile Complex, Tiruppur, Tamil Nadu 641601',
-            'phone' => '+91 74490 78888',
+            'phone' => '+91 123456789',
             'gstin' => 'XXAAAAA0000A1Z5',
             'state' => 'Tamil Nadu',
             'email' => 'support@ryhtextiles.com',

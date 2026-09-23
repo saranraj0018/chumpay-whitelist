@@ -61,7 +61,10 @@
                                 <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Address</h3>
                                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed flex items-start gap-2.5">
                                     <i class="fa-solid fa-location-dot mt-1 text-amber-400 flex-shrink-0"></i>
-                                    <span>RYH Textiles Tiruppur, Tamil Nadu - 641601, India</span>
+                                    <span>Rathinam Techpark
+Rathinam Techzone Campus,
+Pollachi Main Road, Eachanari,
+Coimbatore, Tamil Nadu – 641021, India.</span>
                                 </p>
                             </div>
                             <div>
@@ -82,7 +85,7 @@
                                 <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Mobile Number</h3>
                                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed flex items-center gap-2.5">
                                     <i class="fa-solid fa-phone text-amber-400 flex-shrink-0"></i>
-                                    <span>+91 74490 78888</span>
+                                    <span>+91 123456789</span>
                                 </p>
                             </div>
                         </div>
