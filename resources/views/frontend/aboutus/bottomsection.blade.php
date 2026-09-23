@@ -8,7 +8,7 @@
                 </h2>
 
                 <p class="mt-4 text-slate-500 text-sm md:text-base leading-relaxed max-w-md mx-auto md:mx-0">
-                    Browse, shop, and track orders anytime. Download Chumpay on
+                    Browse, shop, and track orders anytime. Download RYH Textiles on
                     Android & iOS.
                 </p>
 

@@ -20,7 +20,7 @@
 
                     <!-- LEFT SIDE (60%) -->
                     <div class="w-full lg:w-[60%] bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-slate-200/80 shadow-sm">
-                        <p class="text-amber-600 text-xs font-bold uppercase tracking-wider mb-2">Connect With Chumpay</p>
+                        <p class="text-amber-600 text-xs font-bold uppercase tracking-wider mb-2">Connect With RYH Textiles</p>
                         <h2 class="text-slate-900 text-2xl md:text-3xl font-extrabold tracking-tight mb-8 leading-snug">
                             Let’s Build Something Great Together
                         </h2>
@@ -61,14 +61,14 @@
                                 <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Address</h3>
                                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed flex items-start gap-2.5">
                                     <i class="fa-solid fa-location-dot mt-1 text-amber-400 flex-shrink-0"></i>
-                                    <span>Chumpay Textiles Tiruppur, Tamil Nadu - 641601, India</span>
+                                    <span>RYH Textiles Tiruppur, Tamil Nadu - 641601, India</span>
                                 </p>
                             </div>
                             <div>
                                 <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Email</h3>
                                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed flex items-center gap-2.5 break-all sm:break-normal">
                                     <i class="fa-solid fa-envelope text-amber-400 flex-shrink-0"></i>
-                                    <span>support@chumpay.com</span>
+                                    <span>support@ryhtextiles.com</span>
                                 </p>
                             </div>
                             <div>

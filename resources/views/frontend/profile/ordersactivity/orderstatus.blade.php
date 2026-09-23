@@ -85,6 +85,8 @@ $submittedReviewImages = is_array($submittedReviewImages) ? $submittedReviewImag
                     <thead class="bg-slate-50 border-b border-slate-100 text-left text-[11px] uppercase tracking-wider text-slate-500">
                         <tr>
                             <th class="px-5 py-3.5 font-bold">Product</th>
+                            <th class="px-5 py-3.5 font-bold">Size</th>
+                            <th class="px-5 py-3.5 font-bold">Colour</th>
                             <th class="px-5 py-3.5 font-bold text-center">Qty</th>
                             <th class="px-5 py-3.5 font-bold text-right">Price</th>
                         </tr>
@@ -94,6 +96,8 @@ $submittedReviewImages = is_array($submittedReviewImages) ? $submittedReviewImag
                         @php
                         $image = $item->product_image ?: $item->product?->main_image;
                         $review = $item->review;
+                        $showVariantInfo = $item->product?->product_type !== 'single';
+                        $matrix = $showVariantInfo ? ($item->matrix ?: []) : [];
                         @endphp
                         <tr class="align-top hover:bg-slate-50/50 transition-colors">
                             <td class="px-5 py-4">
@@ -105,12 +109,34 @@ $submittedReviewImages = is_array($submittedReviewImages) ? $submittedReviewImag
                                         <p class="font-bold text-slate-900 leading-snug">{{ $item->product_name }}</p>
                                         <p class="mt-1 text-xs text-slate-400">ITEM CODE : <span class="font-mono text-slate-600">{{ $item->product_id }}</span>
                                         </p>
-                                        @if ($item->product_size)
-                                        <p class="mt-1 text-xs font-medium text-slate-500">Size: <span class="text-slate-800 font-bold">{{ $item->product_size }}</span>
-                                        </p>
-                                        @endif
                                     </div>
                                 </div>
+                            </td>
+                            <td class="px-5 py-4 text-xs font-medium text-slate-600">
+                                @if (! $showVariantInfo)
+                                <span class="text-slate-300">—</span>
+                                @elseif (count($matrix))
+                                @foreach ($matrix as $combo)
+                                <p>{{ $combo['size'] ?? '-' }} x {{ $combo['qty'] ?? 0 }}</p>
+                                @endforeach
+                                @elseif ($item->variantSizeValue)
+                                <p>{{ $item->variantSizeValue->value }}</p>
+                                @else
+                                <span class="text-slate-300">—</span>
+                                @endif
+                            </td>
+                            <td class="px-5 py-4 text-xs font-medium text-slate-600">
+                                @if (! $showVariantInfo)
+                                <span class="text-slate-300">—</span>
+                                @elseif (count($matrix))
+                                @foreach ($matrix as $combo)
+                                <p>{{ $combo['color'] ?? '-' }}</p>
+                                @endforeach
+                                @elseif ($item->variantColorValue)
+                                <p>{{ $item->variantColorValue->value }}</p>
+                                @else
+                                <span class="text-slate-300">—</span>
+                                @endif
                             </td>
                             <td class="px-5 py-4 text-center font-bold text-slate-700">{{ $item->quantity }}</td>
                             <td class="px-5 py-4 text-right font-extrabold text-slate-900 whitespace-nowrap">
@@ -249,10 +275,18 @@ $submittedReviewImages = is_array($submittedReviewImages) ? $submittedReviewImag
                     <span class="text-slate-500">Payment method</span>
                     <span class="text-slate-800 font-bold">{{ $paymentMethod }}</span>
                 </div>
+                @if ($isDelivered)
                 <a href="{{ route('orders_invoice_download', $order->id) }}"
                     class="mt-5 w-full bg-[#0f172a] hover:bg-amber-500 hover:text-slate-950 text-white font-semibold rounded-xl py-3 text-xs uppercase tracking-wider transition-all duration-200 text-center block shadow-xs cursor-pointer">
                     Download Invoice
                 </a>
+                @else
+                <span
+                    class="mt-5 w-full bg-slate-100 text-slate-400 font-semibold rounded-xl py-3 text-xs uppercase tracking-wider text-center block cursor-not-allowed"
+                    title="Invoice will be available once the order is delivered">
+                    Download Invoice
+                </span>
+                @endif
             </div>
         </div>
     </div>

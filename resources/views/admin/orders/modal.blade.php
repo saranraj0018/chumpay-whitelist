@@ -41,6 +41,8 @@
                         <tr>
                             <th class="px-3 py-2">#</th>
                             <th class="px-3 py-2">Product</th>
+                            <th class="px-3 py-2">Size</th>
+                            <th class="px-3 py-2">Colour</th>
                             <th class="px-3 py-2">Qty</th>
                             <th class="px-3 py-2">Price</th>
                             <th class="px-3 py-2">Total</th>

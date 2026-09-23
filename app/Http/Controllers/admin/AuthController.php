@@ -56,7 +56,7 @@ class AuthController extends Controller
             'code' => [
                 'required',
                 function ($attribute, $value, $fail) {
-                    if ($value !== 'chumpay2026') {
+                    if ($value !== 'ryh2026') {
                         $fail('The security code is invalid.');
                     }
                 }

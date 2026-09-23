@@ -13,7 +13,7 @@ $isTransparent = request()->routeIs('home') || request()->is('/') || request()->
                 <!-- Logo -->
                 <div class="flex items-center">
                     <a href="{{ route('home') }}" class="inline-block transition-transform hover:scale-105 duration-300">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="Chumpay Logo"
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="RYH Textiles Logo"
                             class="h-5 sm:h-6 md:h-8 lg:h-10 w-auto object-contain">
                     </a>
                 </div>
@@ -63,12 +63,10 @@ $isTransparent = request()->routeIs('home') || request()->is('/') || request()->
                             title="Cart">
                             <i class="fa-solid fa-cart-shopping text-xs sm:text-sm"></i>
                         </a>
-                        @if ($cartCount > 0)
-                        <span
-                            class="absolute -top-1.5 -right-1.5 bg-amber-500 text-black font-extrabold text-[10px] px-1.5 py-0.5 rounded-full leading-none shadow-md animate-pulse">
+                        <span id="navbarCartCount"
+                            class="absolute -top-1.5 -right-1.5 bg-amber-500 text-black font-extrabold text-[10px] px-1.5 py-0.5 rounded-full leading-none shadow-md animate-pulse {{ $cartCount > 0 ? '' : 'hidden' }}">
                             {{ $cartCount > 99 ? '99+' : $cartCount }}
                         </span>
-                        @endif
                     </div>
 
                     <!-- Mobile Hamburger Button -->
@@ -166,7 +164,7 @@ $isTransparent = request()->routeIs('home') || request()->is('/') || request()->
         let isScrolled = false;
         let ticking = false;
 
-        
+
         function updateNavbar() {
             const shouldScroll = (window.pageYOffset || document.documentElement.scrollTop) > 40;
             if (shouldScroll === isScrolled) {

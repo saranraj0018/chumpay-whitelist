@@ -73,10 +73,3 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('admin/js/product.js') }}?v={{ time() }}"></script>
-<option value="{{ $attr->id }}">{{ $attr->name }}</option>
-@endforeach
-`;
-const variantValues = @json($variants);
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('admin/js/product.js') }}?v={{ time() }}"></script>

@@ -44,7 +44,7 @@
 
                     <div id="mobileSection">
                         <div class="flex justify-center mb-6 sm:hidden">
-                            <img src="{{ asset('assets/images/popupmobilelogo.png') }}" alt="Chumpay Logo"
+                            <img src="{{ asset('assets/images/popupmobilelogo.png') }}" alt="RYH Textiles Logo"
                                 class="h-8 w-[130px]">
                         </div>
 
@@ -74,7 +74,7 @@
 
                     <div id="otpSection" class="hidden">
                         <div class="flex justify-center mb-6 sm:hidden">
-                            <img src="{{ asset('assets/images/popupmobilelogo.png') }}" alt="Chumpay Logo"
+                            <img src="{{ asset('assets/images/popupmobilelogo.png') }}" alt="RYH Textiles Logo"
                                 class="h-8 w-[130px]">
                         </div>
 
@@ -122,12 +122,12 @@
 
                     <div id="welcomeSection" class="hidden">
                         <div class="flex justify-center mb-6 sm:hidden">
-                            <img src="{{ asset('assets/images/popupmobilelogo.png') }}" alt="Chumpay Logo"
+                            <img src="{{ asset('assets/images/popupmobilelogo.png') }}" alt="RYH Textiles Logo"
                                 class="h-8 w-[130px]">
                         </div>
 
                         <h2 class="text-2xl sm:text-lg font-semibold mb-6 sm:mb-4 text-left">
-                            Welcome to Chumpay
+                            Welcome to RYH Textiles
                         </h2>
 
                         <label class="text-sm font-medium text-slate-700 mb-2 block text-left">Enter your name</label>

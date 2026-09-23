@@ -72,8 +72,3 @@
     </div>
 </x-layouts.app>
 <script src="{{ asset('admin/js/category.js') }}?v={{ time() }}"></script>
-
-@include('admin.category.model',['categories' => $categories_all])
-</div>
-</x-layouts.app>
-<script src="{{ asset('admin/js/category.js') }}?v={{ time() }}"></script>

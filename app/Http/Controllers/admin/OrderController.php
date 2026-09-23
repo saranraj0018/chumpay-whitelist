@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Events\NewNotification;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\Order;
-use App\Models\User;
 use App\Services\FirebaseService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
@@ -23,11 +22,12 @@ class OrderController extends Controller
 
     public function view(Request $request)
     {
-        $orders = Order::with('user', 'Address', 'orderDetails', 'payment')->whereHas('payment', function ($q) {
+        $orders = Order::with('user', 'Address', 'orderDetails.product', 'orderDetails.variantSizeValue', 'orderDetails.variantColorValue', 'payment')->whereHas('payment', function ($q) {
             $q->where('status', 'PAID');
         })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+
         return view('admin.orders.view', compact('orders'));
     }
 
@@ -36,20 +36,20 @@ class OrderController extends Controller
         try {
             $validated = $request->validate([
                 'order_id' => 'required',
-                'status'   => 'required|integer',
-                'date'     => 'required|date',
-                'id'       => 'required|exists:orders,id',
+                'status' => 'required|integer',
+                'date' => 'required|date',
+                'id' => 'required|exists:orders,id',
             ]);
             $order = Order::with('user')->findOrFail($validated['id']);
-            $user  = $order->user;
-            if (!$user) {
+            $user = $order->user;
+            if (! $user) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'User not found'
+                    'message' => 'User not found',
                 ], 404);
             }
             $status = (int) $validated['status'];
-            $date   = $validated['date'];
+            $date = $validated['date'];
             // Update status timestamps
             switch ($status) {
                 case 3:
@@ -67,9 +67,9 @@ class OrderController extends Controller
             }
             $order->status = $status;
             if ($request->hasFile('refund_image')) {
-                $img_name = time() . '_' . $request->file('refund_image')->getClientOriginalName();
+                $img_name = time().'_'.$request->file('refund_image')->getClientOriginalName();
                 $request->file('refund_image')->storeAs('refunds', $img_name, 'public');
-                $order->refund_image = 'refunds/' . $img_name;
+                $order->refund_image = 'refunds/'.$img_name;
             } elseif ($request->has('existing_image')) {
                 $order->refund_image = $request->existing_image;
             }
@@ -80,7 +80,7 @@ class OrderController extends Controller
             $order->save(); // Save first (important)
 
             try {
-                if (!empty($user->fcm_token)) {
+                if (! empty($user->fcm_token)) {
                     match ($status) {
                         2 => $this->sendOrderNotification($user, $order, 'inprogress', 'Order In Progress'),
                         3 => $this->sendOrderNotification($user, $order, 'shipped', 'Order Shipped'),
@@ -91,29 +91,30 @@ class OrderController extends Controller
                     };
                 }
             } catch (\Throwable $e) {
-                Log::error('Notification failed: ' . $e->getMessage());
+                Log::error('Notification failed: '.$e->getMessage());
             }
 
             return response()->json([
                 'success' => true,
                 'message' => 'Order status updated successfully',
             ]);
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validation error',
-                'errors'  => $e->errors()
+                'errors' => $e->errors(),
             ], 422);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Order not found'
+                'message' => 'Order not found',
             ], 404);
         } catch (\Throwable $e) {
-            Log::error('Update Status Error: ' . $e->getMessage());
+            Log::error('Update Status Error: '.$e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong'
+                'message' => 'Something went wrong',
             ], 500);
         }
     }
@@ -127,7 +128,7 @@ class OrderController extends Controller
             return;
         }
         if ($user->fcm_token) {
-            $notification = new Notification();
+            $notification = new Notification;
             $notification->user_id = $user->id;
             $notification->title = $title;
             $notification->description = "Your order #{$order->order_id} status is now {$statusName}";
@@ -142,7 +143,7 @@ class OrderController extends Controller
                 [
                     'order_id' => $order->order_id,
                     'status' => $statusName,
-                    'type' => 1
+                    'type' => 1,
                 ]
             );
         }

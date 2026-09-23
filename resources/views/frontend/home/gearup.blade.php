@@ -119,7 +119,7 @@
                     <div class="gc-overlay absolute inset-x-0 bottom-0 h-14 flex items-center justify-center
                                     bg-gradient-to-t from-black/50 to-transparent rounded-b-2xl z-10
                                     cursor-pointer"
-                        onclick="addToCartFromCard(event, {{ $product['id'] ?? 0 }})">
+                        onclick="addToCartFromCard(event, {{ $product['id'] ?? 0 }}, 1, '{{ $product['productType'] ?? '' }}', '{{ url('/shop/single-product/' . ($product['id'] ?? 0)) }}')">
                         <span class="gc-cart-pill flex items-center gap-1.5
                                          bg-[#0f172a] text-white
                                          text-[0.74rem] sm:text-[0.80rem] font-bold
@@ -368,25 +368,4 @@
             track.scrollLeft = dragScrollLeft - (e.pageX - track.offsetLeft - dragStartX);
         });
     })();
-
-
-    /* ── Add to Cart ── */
-    function addToCartFromCard(e, productId) {
-        e.preventDefault();
-        e.stopPropagation();
-        const pill = e.currentTarget.querySelector('.gc-cart-pill');
-        if (!pill || pill.dataset.adding) return;
-        pill.dataset.adding = '1';
-        const orig = pill.innerHTML;
-        pill.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3.5 h-3.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg> Added!`;
-        pill.style.background = '#16a34a';
-        pill.style.color = '#fff';
-        setTimeout(() => {
-            pill.innerHTML = orig;
-            pill.style.background = '';
-            pill.style.color = '';
-            delete pill.dataset.adding;
-        }, 1600);
-        // fetch('/cart/add', { method:'POST', headers:{'Content-Type':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name=csrf-token]').content}, body: JSON.stringify({product_id: productId, quantity: 1}) });
-    }
 </script>

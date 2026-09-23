@@ -78,11 +78,31 @@ $(function () {
                 const netAmount = Number(item.net_amount || 0);
                 const quantity = Number(item.quantity || 0);
                 const total = quantity * netAmount;
+                const isSingle = item.product?.product_type === "single";
+                const matrix = Array.isArray(item.matrix) ? item.matrix : [];
+
+                let sizeHtml = "—";
+                let colourHtml = "—";
+                if (!isSingle) {
+                    if (matrix.length > 0) {
+                        sizeHtml = matrix
+                            .map((c) => `${c.size ?? "-"} x ${c.qty ?? 0}`)
+                            .join("<br>");
+                        colourHtml = matrix
+                            .map((c) => c.color ?? "-")
+                            .join("<br>");
+                    } else {
+                        sizeHtml = item.variant_size_value?.value ?? "—";
+                        colourHtml = item.variant_color_value?.value ?? "—";
+                    }
+                }
 
                 const row = `
         <tr>
             <td class="px-3 py-2">${index + 1}</td>
             <td class="px-3 py-2">${item.product_name ?? "N/A"}</td>
+            <td class="px-3 py-2">${sizeHtml}</td>
+            <td class="px-3 py-2">${colourHtml}</td>
             <td class="px-3 py-2">${quantity}</td>
             <td class="px-3 py-2">₹${netAmount.toFixed(2)}</td>
             <td class="px-3 py-2">₹${total.toFixed(2)}</td>
@@ -94,7 +114,7 @@ $(function () {
         } else {
             tbody.append(`
         <tr>
-            <td colspan="5" class="text-center py-3 text-gray-500">No products found in this order.</td>
+            <td colspan="7" class="text-center py-3 text-gray-500">No products found in this order.</td>
         </tr>
     `);
         }

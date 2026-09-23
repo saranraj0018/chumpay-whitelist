@@ -193,6 +193,10 @@
             const items = data.productData || [];
             cartHasItems = items.length > 0;
 
+            if (typeof setNavbarCartCount === 'function') {
+                setNavbarCartCount(parseInt(data.billSummary?.totalItems ?? 0, 10) || 0);
+            }
+
             if (!cartHasItems) {
                 document.getElementById('cartData').classList.add('hidden');
                 document.getElementById('emptyCart').classList.remove('hidden');

@@ -1,11 +1,11 @@
 <x-layouts.auth>
     <div class="w-full max-w-5xl bg-white rounded-3xl shadow-lg overflow-hidden flex border">
         <div class="hidden md:flex w-1/2 bg-white items-center justify-center p-8">
-            <img src="{{ asset('images/chumpay.png') }}" alt="Chumpay" class="max-w-full max-h-full object-contain" />
+            <img src="{{ asset('images/ryhtextiles.png') }}" alt="RYH Textiles" class="max-w-full max-h-full object-contain" />
         </div>
         <div class="w-full md:w-1/2 p-10 flex flex-col justify-center">
             <h2 class="text-2xl font-bold text-[#363636] mb-2">Welcome Back</h2>
-            <p class="text-sm text-gray-500 mb-6">Sign in to your Chumpay dashboard</p>
+            <p class="text-sm text-gray-500 mb-6">Sign in to your RYH Textiles dashboard</p>
             <form method="POST" action="{{ route('admin.authenticate') }}" class="space-y-5" x-data="{ show: false, loading: false }"
                 @submit="loading = true">
                 @csrf

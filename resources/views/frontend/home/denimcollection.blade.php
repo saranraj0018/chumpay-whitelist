@@ -181,7 +181,7 @@
 
                                             {{-- Quick Add To Cart --}}
                                             <button type="button"
-                                                onclick="addToCartFromCard(event, {{ $product['id'] ?? 0 }})"
+                                                onclick="addToCartFromCard(event, {{ $product['id'] ?? 0 }}, 1, '{{ $product['productType'] ?? '' }}', '{{ url('/shop/single-product/' . ($product['id'] ?? 0)) }}')"
                                                 title="Add to Cart"
                                                 class="dc-cart-btn w-7 h-7 sm:w-9 sm:h-9 flex items-center justify-center rounded-full
                                                border border-slate-200 bg-slate-50 text-slate-700
@@ -238,24 +238,3 @@
 </section>
 
 
-
-<script>
-    /* ── Quick Add to Cart Feedback ── */
-    if (typeof window.addToCartFromCard === 'undefined') {
-        window.addToCartFromCard = function(e, productId) {
-            e.preventDefault();
-            e.stopPropagation();
-            const btn = e.currentTarget;
-            if (!btn || btn.dataset.adding) return;
-            btn.dataset.adding = '1';
-            const orig = btn.innerHTML;
-            btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3.5 h-3.5"><polyline points="20 6 9 17 4 12"/></svg>`;
-            btn.classList.add('!bg-emerald-600', '!text-white', '!border-emerald-600');
-            setTimeout(() => {
-                btn.innerHTML = orig;
-                btn.classList.remove('!bg-emerald-600', '!text-white', '!border-emerald-600');
-                delete btn.dataset.adding;
-            }, 1500);
-        };
-    }
-</script>

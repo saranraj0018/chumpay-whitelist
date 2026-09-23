@@ -21,10 +21,9 @@
                     </ul>
                 </div>
                 @endif
-                <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+                <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
                     @csrf
                     <div class="flex flex-col sm:flex-row sm:items-center gap-6 mb-6 pb-6 border-b border-slate-100">
-                        <input type="hidden" name="exiting_image" id="exiting_image" value="{{ $user->image_path ?? '' }}" />
                         <img id="avatarPreview" src="{{ $user->image_path ? asset('storage/' . $user->image_path) : 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=000000&color=ffffff' }}" class="w-20 h-20 rounded-full object-cover ring-4 ring-amber-500/20 shadow-sm" alt="profile">
                         <div>
                             <div class="flex items-center gap-3 mb-2">
@@ -120,6 +119,13 @@
         avatarPreview.src = defaultAvatar;
         fileInput.value = '';
         removeAvatarInput.value = '1';
+    });
+
+    const profileForm = document.getElementById('profileForm');
+    profileForm.addEventListener('submit', function() {
+        const submitBtn = profileForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Saving...';
     });
 </script>
 

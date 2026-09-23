@@ -10,7 +10,7 @@
             {{-- ── Brand Column ── --}}
             <div class="col-span-2 lg:col-span-2 text-center lg:text-left">
                 <div class="flex justify-center lg:justify-start items-center gap-2">
-                    <img src="{{ asset('assets/images/logo.png') }}" class="h-9 md:h-10 w-auto object-contain brightness-110" alt="Chumpay Logo" />
+                    <img src="{{ asset('assets/images/logo.png') }}" class="h-9 md:h-10 w-auto object-contain brightness-110" alt="RYH Textiles Logo" />
                 </div>
                 <p class="mt-4 text-xs sm:text-sm text-slate-400 max-w-sm mx-auto lg:mx-0 leading-relaxed">
                     Premium men's fashion from Tiruppur's finest textile mills.
@@ -86,7 +86,7 @@
                     </li>
                     <li class="flex items-center gap-2.5">
                         <i class="fa-solid fa-envelope text-amber-500 flex-shrink-0 text-xs"></i>
-                        <a href="mailto:support@chumpay.com" class="hover:text-amber-500 transition truncate">support@chumpay.com</a>
+                        <a href="mailto:support@ryhtextiles.com" class="hover:text-amber-500 transition truncate">support@ryhtextiles.com</a>
                     </li>
                 </ul>
             </div>
@@ -113,7 +113,7 @@
 
         {{-- ── Bottom Copyright Strip ── --}}
         <div class="border-t mt-[30px] border-white/10 pt-6 text-center text-xs text-slate-500 leading-relaxed w-full flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p>© {{ date('Y') }} Chumpay. All rights reserved.</p>
+            <p>© {{ date('Y') }} RYH Textiles. All rights reserved.</p>
             <p class="flex items-center gap-1.5 text-slate-400">
                 <span>Crafted with</span>
                 <i class="fa-solid fa-heart text-amber-500 text-2xs"></i>

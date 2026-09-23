@@ -149,8 +149,8 @@
                 <table class="header-table">
                     <tr>
                         <td style="width:18%; text-align:center; vertical-align:middle;">
-                            @if (file_exists(public_path('images/chumpay.png')))
-                                <img src="{{ public_path('images/chumpay.png') }}" width="90">
+                            @if (file_exists(public_path('images/ryhtextiles.png')))
+                                <img src="{{ public_path('images/ryhtextiles.png') }}" width="90">
                             @endif
                         </td>
                         <td style="width:52%;">

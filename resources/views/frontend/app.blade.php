@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chumpay</title>
+    <title>RYH Textiles</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
@@ -96,6 +96,99 @@
                     }
                 })
                 .catch(() => showToast("Something went wrong. Try again.", "error"));
+        }
+
+        // Shared "Add to Cart" handler for product cards across the site (home, shop, etc).
+        // Supports both the pill-overlay card style (.gc-cart-pill) and plain icon-button style.
+        // Variant products need a size/colour chosen first, so send those to the product page instead.
+        function addToCartFromCard(e, productId, quantity = 1, productType = null, productUrl = null) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (productType === "variant") {
+                showToast("Please select size & colour to add this product", "info");
+                if (productUrl) {
+                    setTimeout(() => {
+                        window.location.href = productUrl;
+                    }, 700);
+                }
+                return;
+            }
+
+            if (!window.isLoggedIn) {
+                showToast("Please log in to add to cart", "error");
+                const loginBtn = document.getElementById("LoginBtn") || document.getElementById("mobileLoginBtn");
+                if (loginBtn) loginBtn.click();
+                return;
+            }
+
+            const trigger = e.currentTarget;
+            const feedbackEl = trigger.querySelector(".gc-cart-pill") || trigger;
+            if (feedbackEl.dataset.adding) return;
+            feedbackEl.dataset.adding = "1";
+
+            const originalHTML = feedbackEl.innerHTML;
+            const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+            const csrfToken = csrfMeta ? csrfMeta.content : "{{ csrf_token() }}";
+
+            fetch("{{ route('add_toCart') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        quantity: quantity,
+                    }),
+                })
+                .then(async (res) => {
+                    const data = await res.json().catch(() => ({}));
+
+                    if (res.status === 401 || data.status === 401) {
+                        showToast(data.message || "Please log in to continue", "error");
+                        const loginBtn = document.getElementById("LoginBtn") || document.getElementById("mobileLoginBtn");
+                        if (loginBtn) loginBtn.click();
+                        return;
+                    }
+
+                    if (data.status === 200) {
+                        showToast("Added to cart", "success");
+                        updateNavbarCartCount(quantity);
+                        const isPill = feedbackEl.classList.contains("gc-cart-pill");
+                        feedbackEl.innerHTML =
+                            `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3.5 h-3.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>${isPill ? " Added!" : ""}`;
+                        feedbackEl.classList.add("!bg-emerald-600", "!text-white", "!border-emerald-600");
+                    } else {
+                        showToast(data.message || "Something went wrong", "error");
+                    }
+                })
+                .catch(() => showToast("Something went wrong. Try again.", "error"))
+                .finally(() => {
+                    setTimeout(() => {
+                        feedbackEl.innerHTML = originalHTML;
+                        feedbackEl.classList.remove("!bg-emerald-600", "!text-white", "!border-emerald-600");
+                        delete feedbackEl.dataset.adding;
+                    }, 1500);
+                });
+        }
+
+        function updateNavbarCartCount(delta) {
+            const badge = document.getElementById("navbarCartCount");
+            if (!badge) return;
+            const current = parseInt(badge.textContent, 10) || 0;
+            setNavbarCartCount(current + delta);
+        }
+
+        // Sets the navbar cart badge to an authoritative count (e.g. from /cart/detail),
+        // rather than an optimistic delta. Use this whenever the real total is known.
+        function setNavbarCartCount(count) {
+            const badge = document.getElementById("navbarCartCount");
+            if (!badge) return;
+            const next = Math.max(0, count);
+            badge.textContent = next > 99 ? "99+" : next;
+            badge.classList.toggle("hidden", next <= 0);
         }
     </script>
 </body>

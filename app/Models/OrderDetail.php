@@ -19,8 +19,16 @@ class OrderDetail extends Model
         'net_amount',
         'gst_type',
         'gst_percentage',
-        'gst_amount'
+        'gst_amount',
+        'matrix',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'matrix' => 'array',
+        ];
+    }
 
     public function order()
     {
@@ -40,5 +48,15 @@ class OrderDetail extends Model
     public function product_variant()
     {
         return $this->belongsTo(ProductVariant::class, 'product_variant_id');
+    }
+
+    public function variantSizeValue()
+    {
+        return $this->belongsTo(VariantAttributeValue::class, 'variant_size_id');
+    }
+
+    public function variantColorValue()
+    {
+        return $this->belongsTo(VariantAttributeValue::class, 'variant_color_id');
     }
 }
